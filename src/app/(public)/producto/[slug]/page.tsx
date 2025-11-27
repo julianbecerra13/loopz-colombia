@@ -175,8 +175,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 <h3 className="font-semibold text-white mb-3">Especificaciones</h3>
                 <div className="grid grid-cols-2 gap-2">
                   {product.specs.map((spec, index) => (
-                    <div key={index} className="flex justify-between py-2 px-3 bg-white/5 border border-white/10 rounded-lg">
-                      <span className="text-sm text-gray-500">{spec.name}</span>
+                    <div key={index} className="flex justify-between py-2 px-3 bg-[#00FF88]/5 border border-[#00FF88]/30 rounded-lg shadow-[0_0_10px_rgba(0,255,136,0.1)]">
+                      <span className="text-sm text-[#00FF88] font-medium drop-shadow-[0_0_4px_rgba(0,255,136,0.5)]">{spec.name}</span>
                       <span className="text-sm font-medium text-white">{spec.value}</span>
                     </div>
                   ))}
