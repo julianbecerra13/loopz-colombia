@@ -25,7 +25,7 @@ export function FeaturedProducts({ products }: FeaturedProductsProps) {
               Los más populares
             </h2>
           </div>
-          <Button variant="outline" asChild className="self-start md:self-auto border-gray-300 border-[#2A4A6F] text-white hover:bg-[#1E3A5F]">
+          <Button variant="outline" asChild className="self-start md:self-auto border-[#2A4A6F] text-white hover:bg-[#1E3A5F]">
             <Link href="/catalogo" className="gap-2">
               Ver todo el catálogo
               <ArrowRight className="w-4 h-4" />
