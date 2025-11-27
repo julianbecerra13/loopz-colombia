@@ -25,19 +25,19 @@ export function Contact() {
     {
       icon: Mail,
       title: 'Email',
-      value: 'info@inears.com',
-      href: 'mailto:info@inears.com',
+      value: 'loopzcolombia@gmail.com',
+      href: 'mailto:loopzcolombia@gmail.com',
     },
     {
       icon: Phone,
       title: 'Teléfono',
-      value: '+52 (55) 1234-5678',
-      href: 'tel:+525512345678',
+      value: '+57 316 893 3842',
+      href: 'tel:+573168933842',
     },
     {
       icon: MapPin,
       title: 'Ubicación',
-      value: 'Ciudad de México, México',
+      value: 'Colombia',
       href: '#',
     },
   ]
