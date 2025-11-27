@@ -1,0 +1,103 @@
+// Schema de Base de Datos - InEars Store
+// SQLite para desarrollo, migrable a MySQL/PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Usuario administrador
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Categoría de productos
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  image       String?
+  order       Int       @default(0)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
+}
+
+// Producto principal
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String
+  shortDesc   String?
+  price       Float
+  comparePrice Float?
+
+  // Imágenes
+  mainImage   String
+  images      String?
+
+  // Especificaciones técnicas (JSON)
+  specs       String?
+
+  // SEO y metadata
+  metaTitle   String?
+  metaDesc    String?
+
+  // Estado y visibilidad
+  isActive    Boolean  @default(true)
+  isFeatured  Boolean  @default(false)
+  isNew       Boolean  @default(false)
+
+  // Stock (informativo)
+  inStock     Boolean  @default(true)
+
+  // Relaciones
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([categoryId])
+  @@index([isActive, isFeatured])
+  @@index([slug])
+}
+
+// Configuración del sitio
+model SiteConfig {
+  id          String   @id @default("main")
+  siteName    String   @default("InEars Store")
+  tagline     String?
+  description String?
+  logo        String?
+  favicon     String?
+
+  // Contacto
+  email       String?
+  phone       String?
+  address     String?
+
+  // Redes sociales (JSON)
+  socialLinks String?
+
+  // SEO
+  metaTitle   String?
+  metaDesc    String?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

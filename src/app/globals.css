@@ -1,26 +1,151 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ========================================
+   INEARS STORE - Custom Theme
+   Colores: Blanco, Azul Oscuro, Verde Neón
+   ======================================== */
 
 @theme inline {
+  /* Colores base */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* Paleta personalizada */
+  --color-dark-blue: #0A1628;
+  --color-dark-blue-light: #1E3A5F;
+  --color-dark-blue-lighter: #2A4A6F;
+  --color-neon-green: #00FF88;
+  --color-neon-green-dark: #00CC6A;
+  --color-neon-green-glow: #39FF14;
+
+  /* Fuentes */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Border radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #FFFFFF;
+  --foreground: #0A1628;
+
+  /* Shadcn UI variables */
+  --card: #FFFFFF;
+  --card-foreground: #0A1628;
+  --popover: #FFFFFF;
+  --popover-foreground: #0A1628;
+  --primary: #0A1628;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F1F5F9;
+  --secondary-foreground: #0A1628;
+  --muted: #F1F5F9;
+  --muted-foreground: #64748B;
+  --accent: #00FF88;
+  --accent-foreground: #0A1628;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --border: #E2E8F0;
+  --input: #E2E8F0;
+  --ring: #00FF88;
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: #0A1628;
+  --foreground: #F8FAFC;
+  --card: #1E3A5F;
+  --card-foreground: #F8FAFC;
+  --popover: #1E3A5F;
+  --popover-foreground: #F8FAFC;
+  --primary: #00FF88;
+  --primary-foreground: #0A1628;
+  --secondary: #1E3A5F;
+  --secondary-foreground: #F8FAFC;
+  --muted: #1E3A5F;
+  --muted-foreground: #94A3B8;
+  --accent: #00FF88;
+  --accent-foreground: #0A1628;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --border: #2A4A6F;
+  --input: #2A4A6F;
+  --ring: #00FF88;
+}
+
+* {
+  border-color: var(--border);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Efecto glow para elementos destacados */
+.neon-glow {
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3),
+              0 0 40px rgba(0, 255, 136, 0.1);
+}
+
+.neon-glow-strong {
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.5),
+              0 0 40px rgba(0, 255, 136, 0.3),
+              0 0 60px rgba(0, 255, 136, 0.1);
+}
+
+.neon-text {
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5),
+               0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+/* Gradientes personalizados */
+.gradient-dark {
+  background: linear-gradient(135deg, #0A1628 0%, #1E3A5F 100%);
+}
+
+.gradient-neon {
+  background: linear-gradient(135deg, #00FF88 0%, #00CC6A 100%);
+}
+
+/* Animaciones suaves */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-neon {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-neon {
+  animation: pulse-neon 2s ease-in-out infinite;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dark-blue-light, #1E3A5F);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-green, #00FF88);
 }
