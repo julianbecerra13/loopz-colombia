@@ -42,14 +42,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0A1628] via-[#0D1B2A] to-[#1a0a2e] flex items-center justify-center p-4">
-      {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-[#00FF88]/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 -right-32 w-[600px] h-[600px] bg-[#1E3A5F]/20 rounded-full blur-[120px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[100px]" />
-      </div>
-
+    <div className="min-h-screen flex items-center justify-center p-4">
       <Card className="w-full max-w-md relative z-10 bg-white/5 border-white/10 backdrop-blur-xl">
         <CardHeader className="text-center">
           {/* Logo */}
@@ -81,7 +74,7 @@ export default function LoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@inears.com"
+                placeholder="correo@ejemplo.com"
                 required
                 className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#00FF88]/50 focus:ring-[#00FF88]/20"
               />
@@ -129,9 +122,6 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          <p className="text-center text-gray-500 text-xs mt-6">
-            Usuario demo: admin@inears.com / admin123
-          </p>
         </CardContent>
       </Card>
     </div>
