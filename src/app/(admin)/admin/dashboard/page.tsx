@@ -117,7 +117,7 @@ export default async function DashboardPage() {
                     </div>
                     <div className="text-right">
                       <p className="font-semibold text-white">
-                        {formatPrice(product.price)}
+                        {formatPrice(product.price)} <span className="text-xs text-gray-400">COP</span>
                       </p>
                       <p className={`text-xs ${product.isActive ? 'text-[#00FF88]' : 'text-gray-500'}`}>
                         {product.isActive ? 'Activo' : 'Inactivo'}

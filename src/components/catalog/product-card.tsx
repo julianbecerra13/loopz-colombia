@@ -93,6 +93,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <span className="text-xl font-bold text-white">
             {formatPrice(product.price)}
           </span>
+          <span className="text-xs text-gray-400 font-medium">COP</span>
           {hasDiscount && (
             <span className="text-sm text-gray-500 line-through">
               {formatPrice(product.comparePrice!)}

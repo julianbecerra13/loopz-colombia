@@ -136,6 +136,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <span className="text-4xl font-bold text-[#00FF88] drop-shadow-[0_0_10px_rgba(0,255,136,0.4)]">
                 {formatPrice(product.price)}
               </span>
+              <span className="text-sm text-gray-400 font-medium">COP</span>
               {hasDiscount && (
                 <span className="text-xl text-gray-500 line-through">
                   {formatPrice(product.comparePrice!)}
@@ -250,7 +251,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                         {relatedProduct.name}
                       </h3>
                       <p className="text-lg font-bold text-[#00FF88] mt-1 drop-shadow-[0_0_6px_rgba(0,255,136,0.4)]">
-                        {formatPrice(relatedProduct.price)}
+                        {formatPrice(relatedProduct.price)} <span className="text-xs text-gray-400 font-medium">COP</span>
                       </p>
                     </CardContent>
                   </Link>
