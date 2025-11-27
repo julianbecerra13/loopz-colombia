@@ -12,7 +12,8 @@ import {
   Headphones,
   ExternalLink,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Sparkles
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -21,6 +22,7 @@ const menuItems = [
   { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/productos', label: 'Productos', icon: Package },
   { href: '/admin/categorias', label: 'Categorías', icon: FolderTree },
+  { href: '/admin/hero', label: 'Hero Landing', icon: Sparkles },
 ]
 
 const SIDEBAR_KEY = 'admin-sidebar-collapsed'

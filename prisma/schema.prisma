@@ -47,6 +47,7 @@ model Product {
   // Imágenes
   mainImage   String
   images      String?
+  videoUrl    String?
 
   // Especificaciones técnicas (JSON)
   specs       String?
@@ -97,6 +98,9 @@ model SiteConfig {
   // SEO
   metaTitle   String?
   metaDesc    String?
+
+  // Hero dinámico
+  heroProductId String?
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

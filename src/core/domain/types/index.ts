@@ -10,6 +10,7 @@ export interface Product {
   comparePrice: number | null
   mainImage: string
   images: string[]
+  videoUrl: string | null
   specs: ProductSpec[]
   metaTitle: string | null
   metaDesc: string | null
@@ -64,6 +65,7 @@ export interface SiteConfig {
   socialLinks: SocialLink[]
   metaTitle: string | null
   metaDesc: string | null
+  heroProductId: string | null
 }
 
 export interface SocialLink {
@@ -82,6 +84,7 @@ export interface CreateProductDTO {
   comparePrice?: number
   mainImage: string
   images?: string[]
+  videoUrl?: string
   specs?: ProductSpec[]
   categoryId: string
   isActive?: boolean

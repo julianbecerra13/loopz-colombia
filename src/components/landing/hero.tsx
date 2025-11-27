@@ -5,8 +5,15 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Play } from 'lucide-react'
+import type { Product } from '@/core/domain/types'
 
-export function Hero() {
+interface HeroProps {
+  product?: Product | null
+}
+
+export function Hero({ product }: HeroProps) {
+  const hasVideo = product?.videoUrl
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0A1628]">
       {/* Background Effects */}
@@ -54,8 +61,10 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="text-gray-300 text-lg md:text-xl max-w-xl mx-auto lg:mx-0"
             >
-              Descubre nuestra colección premium de in-ear monitors diseñados para audiófilos
-              que buscan la máxima fidelidad de audio.
+              {product
+                ? `Descubre ${product.name} - ${product.shortDesc || product.description.substring(0, 100)}...`
+                : 'Descubre nuestra colección premium de in-ear monitors diseñados para audiófilos que buscan la máxima fidelidad de audio.'
+              }
             </motion.p>
 
             <motion.div
@@ -65,17 +74,29 @@ export function Hero() {
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
               <Button variant="neon" size="xl" asChild>
-                <Link href="/catalogo" className="gap-2">
-                  Explorar Catálogo
+                <Link href={product ? `/producto/${product.slug}` : '/catalogo'} className="gap-2">
+                  {product ? 'Ver Producto' : 'Explorar Catálogo'}
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </Button>
-              <Button variant="outline" size="xl" className="border-[#2A4A6F] text-white hover:bg-[#1E3A5F]" asChild>
-                <a href="https://www.youtube.com/shorts/WAYYxYtFx_A" target="_blank" rel="noopener noreferrer">
+              {hasVideo ? (
+                <Button variant="outline" size="xl" className="border-[#2A4A6F] text-white hover:bg-[#1E3A5F]" asChild>
+                  <a href={product.videoUrl!} target="_blank" rel="noopener noreferrer">
+                    <Play className="w-5 h-5 mr-2" />
+                    Ver Video
+                  </a>
+                </Button>
+              ) : (
+                <Button
+                  variant="outline"
+                  size="xl"
+                  className="border-[#2A4A6F]/50 text-gray-500 cursor-not-allowed"
+                  disabled
+                >
                   <Play className="w-5 h-5 mr-2" />
                   Ver Video
-                </a>
-              </Button>
+                </Button>
+              )}
             </motion.div>
 
             {/* Stats */}
@@ -112,26 +133,36 @@ export function Hero() {
               <div className="absolute inset-0 rounded-full border-2 border-dashed border-[#1E3A5F] animate-[spin_20s_linear_infinite]" />
               <div className="absolute inset-8 rounded-full border border-[#2A4A6F]" />
 
-              {/* Center - IEMs Image */}
+              {/* Center - Product Image */}
               <div className="absolute inset-16 rounded-full overflow-hidden shadow-[0_0_40px_rgba(0,255,136,0.3)] border-4 border-[#00FF88]/30">
-                <Image
-                  src="/inears.jpg"
-                  alt="Premium In-Ear Monitors"
-                  fill
-                  className="object-cover scale-125"
-                  priority
-                />
+                {product?.mainImage ? (
+                  <Image
+                    src={product.mainImage}
+                    alt={product.name}
+                    fill
+                    className="object-cover scale-125"
+                    priority
+                  />
+                ) : (
+                  <Image
+                    src="/inears.jpg"
+                    alt="Premium In-Ear Monitors"
+                    fill
+                    className="object-cover scale-125"
+                    priority
+                  />
+                )}
               </div>
 
               {/* Floating Elements */}
               <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md border border-[#00FF88]/30 rounded-lg px-3 py-1.5 text-xs text-white animate-float shadow-[0_0_15px_rgba(0,255,136,0.2)]">
-                Hi-Res Audio
+                {product?.category?.name || 'Hi-Res Audio'}
               </div>
               <div className="absolute bottom-12 left-4 bg-white/10 backdrop-blur-md border border-[#00FF88]/30 rounded-lg px-3 py-1.5 text-xs text-white animate-float shadow-[0_0_15px_rgba(0,255,136,0.2)]" style={{ animationDelay: '1s' }}>
-                10 Drivers
+                {product?.specs?.[0]?.value || '10 Drivers'}
               </div>
               <div className="absolute bottom-12 right-4 bg-white/10 backdrop-blur-md border border-[#00FF88]/30 rounded-lg px-3 py-1.5 text-xs text-white animate-float shadow-[0_0_15px_rgba(0,255,136,0.2)]" style={{ animationDelay: '2s' }}>
-                MMCX
+                {product?.specs?.[1]?.value || 'MMCX'}
               </div>
             </div>
           </motion.div>

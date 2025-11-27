@@ -33,6 +33,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
   const [isFeatured, setIsFeatured] = useState(product?.isFeatured ?? false)
   const [isNew, setIsNew] = useState(product?.isNew ?? true)
   const [stock, setStock] = useState(product?.stock?.toString() || '0')
+  const [videoUrl, setVideoUrl] = useState(product?.videoUrl || '')
   const [specs, setSpecs] = useState<ProductSpec[]>(product?.specs || [])
 
   // Auto-generate slug from name
@@ -74,6 +75,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
       price: parseFloat(price),
       comparePrice: comparePrice ? parseFloat(comparePrice) : null,
       mainImage,
+      videoUrl: videoUrl || null,
       categoryId,
       isActive,
       isFeatured,
@@ -218,12 +220,12 @@ export function ProductForm({ product, categories }: ProductFormProps) {
         </CardContent>
       </Card>
 
-      {/* Images */}
+      {/* Images & Video */}
       <Card className="bg-white/5 backdrop-blur-xl border-white/10">
         <CardHeader>
-          <CardTitle className="text-white">Imagen</CardTitle>
+          <CardTitle className="text-white">Imagen y Video</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-white mb-2">
               Imagen principal *
@@ -232,6 +234,20 @@ export function ProductForm({ product, categories }: ProductFormProps) {
               value={mainImage}
               onChange={setMainImage}
             />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-white mb-2">
+              URL del Video (opcional)
+            </label>
+            <Input
+              value={videoUrl}
+              onChange={(e) => setVideoUrl(e.target.value)}
+              placeholder="https://www.youtube.com/watch?v=..."
+              className={inputClasses}
+            />
+            <p className="mt-1 text-xs text-gray-400">
+              Link de YouTube u otra plataforma para el botón "Ver Video"
+            </p>
           </div>
         </CardContent>
       </Card>
