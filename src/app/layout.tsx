@@ -15,17 +15,21 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'InEars Store - Audio Premium',
-    template: '%s | InEars Store',
+    default: 'Loopz Colombia - Audio Premium',
+    template: '%s | Loopz Colombia',
   },
-  description: 'Tienda de in-ear monitors y equipos de audio premium. Descubre nuestra colección de IEMs, cables, DACs y accesorios para audiófilos.',
-  keywords: ['in-ear monitors', 'IEMs', 'audiófilos', 'audio premium', 'DAC', 'cables audio'],
-  authors: [{ name: 'InEars Store' }],
+  description: 'Tienda de in-ear monitors y equipos de audio premium en Colombia. Descubre nuestra colección de IEMs, cables, DACs y accesorios para audiófilos.',
+  keywords: ['in-ear monitors', 'IEMs', 'audiófilos', 'audio premium', 'DAC', 'cables audio', 'Colombia'],
+  authors: [{ name: 'Loopz Colombia' }],
+  icons: {
+    icon: '/logocirculo.png',
+    apple: '/logocirculo.png',
+  },
   openGraph: {
-    title: 'InEars Store - Audio Premium',
-    description: 'Tienda de in-ear monitors y equipos de audio premium',
+    title: 'Loopz Colombia - Audio Premium',
+    description: 'Tienda de in-ear monitors y equipos de audio premium en Colombia',
     type: 'website',
-    locale: 'es_MX',
+    locale: 'es_CO',
   },
 }
 
