@@ -5,6 +5,7 @@ import { AdminHeader } from '@/components/admin/header'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ProductRepository } from '@/core/infrastructure/repositories/product.repository'
 import { CategoryRepository } from '@/core/infrastructure/repositories/category.repository'
+import { formatPrice } from '@/lib/utils'
 
 export const dynamic = 'force-dynamic'
 
@@ -116,7 +117,7 @@ export default async function DashboardPage() {
                     </div>
                     <div className="text-right">
                       <p className="font-semibold text-white">
-                        ${product.price.toFixed(2)}
+                        {formatPrice(product.price)}
                       </p>
                       <p className={`text-xs ${product.isActive ? 'text-[#00FF88]' : 'text-gray-500'}`}>
                         {product.isActive ? 'Activo' : 'Inactivo'}

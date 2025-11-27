@@ -6,11 +6,13 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-// Formatear precio
-export function formatPrice(price: number, currency = 'USD'): string {
-  return new Intl.NumberFormat('es-MX', {
+// Formatear precio en COP (peso colombiano)
+export function formatPrice(price: number): string {
+  return new Intl.NumberFormat('es-CO', {
     style: 'currency',
-    currency,
+    currency: 'COP',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   }).format(price)
 }
 
