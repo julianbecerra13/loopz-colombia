@@ -59,10 +59,11 @@ export async function POST(request: NextRequest) {
       url: result.secure_url,
       publicId: result.public_id,
     })
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error al subir archivo:', error)
+    const errorMessage = error?.message || error?.error?.message || 'Error desconocido'
     return NextResponse.json(
-      { error: 'Error al procesar el archivo. Verifica la configuración de Cloudinary.' },
+      { error: `Error: ${errorMessage}` },
       { status: 500 }
     )
   }
