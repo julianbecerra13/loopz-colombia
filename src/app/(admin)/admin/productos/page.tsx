@@ -97,7 +97,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                           <span className="font-semibold text-white">
                             {formatPrice(product.price)}
                           </span>
-                          <span className="text-xs text-gray-400 ml-1">COP</span>
+                          <span className="text-xs text-[#00FF88] ml-1 drop-shadow-[0_0_6px_rgba(0,255,136,0.5)]">COP</span>
                           {product.comparePrice && (
                             <span className="block text-xs text-gray-500 line-through">
                               {formatPrice(product.comparePrice)}
