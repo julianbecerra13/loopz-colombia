@@ -7,7 +7,13 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ImageUpload } from '@/components/admin/image-upload'
-import { generateSlug } from '@/lib/utils'
+import { generateSlug, formatPrice } from '@/lib/utils'
+
+// Formatear número con separadores de miles (sin símbolo de moneda)
+function formatNumber(value: string): string {
+  const num = parseInt(value.replace(/\D/g, '')) || 0
+  return num.toLocaleString('es-CO')
+}
 import type { Product, Category, ProductSpec } from '@/core/domain/types'
 
 interface ProductFormProps {
@@ -296,6 +302,11 @@ export function ProductForm({ product, categories }: ProductFormProps) {
                       className={`pl-7 ${inputClasses}`}
                     />
                   </div>
+                  {price && parseInt(price) > 0 && (
+                    <p className="mt-1.5 text-xs text-[#00FF88]">
+                      $ {formatNumber(price)} COP
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-300 mb-2">
@@ -313,6 +324,11 @@ export function ProductForm({ product, categories }: ProductFormProps) {
                       className={`pl-7 ${inputClasses}`}
                     />
                   </div>
+                  {comparePrice && parseInt(comparePrice) > 0 && (
+                    <p className="mt-1.5 text-xs text-gray-400">
+                      $ {formatNumber(comparePrice)} COP
+                    </p>
+                  )}
                 </div>
                 <div className="col-span-2 md:col-span-1">
                   <label className="block text-sm font-medium text-gray-300 mb-2">
