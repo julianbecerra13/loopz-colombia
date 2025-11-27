@@ -37,8 +37,8 @@ export function Contact() {
     {
       icon: MapPin,
       title: 'Ubicación',
-      value: 'Colombia',
-      href: '#',
+      value: 'Bucaramanga, Santander',
+      href: 'https://maps.google.com/?q=Bucaramanga,Santander,Colombia',
     },
   ]
 
@@ -92,16 +92,18 @@ export function Contact() {
               ))}
             </div>
 
-            {/* Map placeholder */}
+            {/* Google Maps */}
             <Card className="overflow-hidden border-gray-100 dark:border-[#00FF88]/30 dark:bg-white/5 dark:backdrop-blur-xl">
-              <div className="h-48 bg-gray-50 dark:bg-transparent flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-14 h-14 mx-auto mb-3 rounded-xl border-2 border-gray-200 dark:border-[#00FF88]/30 dark:bg-[#00FF88]/10 flex items-center justify-center">
-                    <MapPin className="w-6 h-6 text-gray-400 dark:text-[#00FF88]" />
-                  </div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Mapa del showroom</p>
-                </div>
-              </div>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126615.95442011647!2d-73.17509868261717!3d7.119473899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e683f9a1f5b80b9%3A0x3ba3c28e5c9db508!2sBucaramanga%2C%20Santander%2C%20Colombia!5e0!3m2!1ses!2sus!4v1701100000000!5m2!1ses!2sus"
+                width="100%"
+                height="200"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+              />
             </Card>
           </FadeIn>
 
