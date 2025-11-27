@@ -1,12 +1,11 @@
-// Schema de Base de Datos - InEars Store
-// SQLite para desarrollo, migrable a MySQL/PostgreSQL
+// Schema de Base de Datos - Loopz Colombia Store
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
