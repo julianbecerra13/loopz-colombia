@@ -6,7 +6,7 @@ import { Save, Loader2, Plus, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+import { ImageUpload } from '@/components/admin/image-upload'
 import { generateSlug } from '@/lib/utils'
 import type { Product, Category, ProductSpec } from '@/core/domain/types'
 
@@ -32,7 +32,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
   const [isActive, setIsActive] = useState(product?.isActive ?? true)
   const [isFeatured, setIsFeatured] = useState(product?.isFeatured ?? false)
   const [isNew, setIsNew] = useState(product?.isNew ?? true)
-  const [inStock, setInStock] = useState(product?.inStock ?? true)
+  const [stock, setStock] = useState(product?.stock?.toString() || '0')
   const [specs, setSpecs] = useState<ProductSpec[]>(product?.specs || [])
 
   // Auto-generate slug from name
@@ -65,6 +65,7 @@ export function ProductForm({ product, categories }: ProductFormProps) {
     setError('')
     setIsLoading(true)
 
+    const stockNum = parseInt(stock) || 0
     const data = {
       name,
       slug,
@@ -77,7 +78,8 @@ export function ProductForm({ product, categories }: ProductFormProps) {
       isActive,
       isFeatured,
       isNew,
-      inStock,
+      stock: stockNum,
+      inStock: stockNum > 0,
       specs: specs.filter(s => s.name && s.value),
     }
 
@@ -224,27 +226,12 @@ export function ProductForm({ product, categories }: ProductFormProps) {
         <CardContent>
           <div>
             <label className="block text-sm font-medium text-white mb-2">
-              URL de imagen principal *
+              Imagen principal *
             </label>
-            <Input
+            <ImageUpload
               value={mainImage}
-              onChange={(e) => setMainImage(e.target.value)}
-              placeholder="https://ejemplo.com/imagen.jpg"
-              required
-              className={inputClasses}
+              onChange={setMainImage}
             />
-            {mainImage && (
-              <div className="mt-4">
-                <img
-                  src={mainImage}
-                  alt="Preview"
-                  className="w-32 h-32 object-contain rounded-xl border border-white/20 bg-white/5"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = 'none'
-                  }}
-                />
-              </div>
-            )}
           </div>
         </CardContent>
       </Card>
@@ -255,23 +242,44 @@ export function ProductForm({ product, categories }: ProductFormProps) {
           <CardTitle className="text-white">Categoría y Estado</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-white mb-2">
-              Categoría *
-            </label>
-            <select
-              value={categoryId}
-              onChange={(e) => setCategoryId(e.target.value)}
-              required
-              className="flex h-10 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00FF88]/30 focus:border-[#00FF88]/50 transition-colors"
-            >
-              <option value="" className="bg-[#0A1628]">Seleccionar categoría</option>
-              {categories.map((cat) => (
-                <option key={cat.id} value={cat.id} className="bg-[#0A1628]">
-                  {cat.name}
-                </option>
-              ))}
-            </select>
+          <div className="grid md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-white mb-2">
+                Categoría *
+              </label>
+              <select
+                value={categoryId}
+                onChange={(e) => setCategoryId(e.target.value)}
+                required
+                className="flex h-10 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00FF88]/30 focus:border-[#00FF88]/50 transition-colors"
+              >
+                <option value="" className="bg-[#0A1628]">Seleccionar categoría</option>
+                {categories.map((cat) => (
+                  <option key={cat.id} value={cat.id} className="bg-[#0A1628]">
+                    {cat.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-white mb-2">
+                Stock (cantidad disponible)
+              </label>
+              <Input
+                type="number"
+                min="0"
+                value={stock}
+                onChange={(e) => setStock(e.target.value)}
+                placeholder="0"
+                className={inputClasses}
+              />
+              <p className="mt-1 text-xs text-gray-400">
+                {parseInt(stock) > 0
+                  ? <span className="text-[#00FF88]">✓ En stock ({stock} unidades)</span>
+                  : <span className="text-red-400">✗ Sin stock</span>
+                }
+              </p>
+            </div>
           </div>
 
           <div className="flex flex-wrap gap-4">
@@ -301,15 +309,6 @@ export function ProductForm({ product, categories }: ProductFormProps) {
                 className="w-4 h-4 rounded border-white/20 bg-white/5 text-[#00FF88] focus:ring-[#00FF88]/30"
               />
               <span className="text-sm">Nuevo</span>
-            </label>
-            <label className="flex items-center gap-2 cursor-pointer text-gray-300 hover:text-white transition-colors">
-              <input
-                type="checkbox"
-                checked={inStock}
-                onChange={(e) => setInStock(e.target.checked)}
-                className="w-4 h-4 rounded border-white/20 bg-white/5 text-[#00FF88] focus:ring-[#00FF88]/30"
-              />
-              <span className="text-sm">En stock</span>
             </label>
           </div>
         </CardContent>

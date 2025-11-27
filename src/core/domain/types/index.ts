@@ -16,6 +16,7 @@ export interface Product {
   isActive: boolean
   isFeatured: boolean
   isNew: boolean
+  stock: number
   inStock: boolean
   categoryId: string
   category?: Category
@@ -86,6 +87,7 @@ export interface CreateProductDTO {
   isActive?: boolean
   isFeatured?: boolean
   isNew?: boolean
+  stock?: number
   inStock?: boolean
 }
 

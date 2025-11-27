@@ -60,7 +60,8 @@ model Product {
   isFeatured  Boolean  @default(false)
   isNew       Boolean  @default(false)
 
-  // Stock (informativo)
+  // Stock
+  stock       Int      @default(0)
   inStock     Boolean  @default(true)
 
   // Relaciones
